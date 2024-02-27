@@ -1,6 +1,19 @@
 cross="X"
 circle="O"
 
+def printgrid(list):
+    for a in range (3):
+        for b in range(3):
+            ind=(3*(a))+b
+            if(list[ind]==0):
+                print("_", end=" ")
+            elif(list[ind]==1):
+                print("X", end=" ")
+            elif(list[ind]==2):
+                print("O", end=" ")
+        print("\n")
+
+
 def single():
     print("\n"+"\033[1mSINGLE PLAYER MODE\033[0m"+"\n")
     list=[0]*9
@@ -11,21 +24,45 @@ def multi():
     print("\n"+"\033[1mMULTI PLAYER MODE\033[0m"+"\n")
     list=[0]*9
     global cross # dented by 1
-    global circle # denoted by 2
+    global circle # denoted by 2 ## 0 means empty
     turn=0 
 
     while(True):
-        if(turn==0): #player one turn
-            print("Player 1's turn\n"+"Enter box to be marked : ")
-            row=int(input())
-            col=int(input())
-            index=(3*(row-1))+col-1
+        
+        if(turn==0): #player one X turn
+            print("Player 1's turn\n")
 
+            turnbool=True
+            while(turnbool):
+                row=int(input("Enter Row:"))
+                col=int(input("Enter Coloumn:"))
+                index=(3*(row-1))+col-1
 
-
+                if(list[index]==0):
+                    list[index]=1
+                    turnbool=False
+                else:
+                    print("Block already marked. Try again")
+                
+                printgrid(list)
             turn=1
 
         elif(turn==1): #player one turn
+            print("Player 2's turn\n")
+
+            turnbool=True
+            while(turnbool):
+                row=int(input("Enter Row:"))
+                col=int(input("Enter Coloumn:"))
+                index=(3*(row-1))+col-1
+
+                if(list[index]==0):
+                    list[index]=2
+                    turnbool=False
+                else:
+                    print("Block already marked. Try again")
+                
+                printgrid(list)
             turn=0
 
 
