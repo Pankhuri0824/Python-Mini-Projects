@@ -2,7 +2,7 @@ cross="X"
 circle="O"
 
 def printgrid(list):
-    for a in range (3):
+    for a in range (3):                       
         for b in range(3):
             ind=(3*(a))+b
             if(list[ind]==0):
@@ -12,6 +12,34 @@ def printgrid(list):
             elif(list[ind]==2):
                 print("O", end=" ")
         print("\n")
+
+def check(list):
+        
+        if(( (list[0]==list[1]==list[2]) or (list[0]==list[3]==list[6]))):
+            if(list[0]==1):
+                return 1
+            elif(list[0]==2):
+                return 2
+
+        elif(( (list[4]==list[3]==list[5]) or (list[4]==list[1]==list[7]))):
+            if(list[4]==1):
+                return 1
+            elif(list[4]==2):
+                return 2
+        
+        elif(( (list[8]==list[7]==list[6]) or (list[8]==list[5]==list[2]))):
+            if(list[8]==1):
+                return 1
+            elif(list[8]==2):
+                return 2
+        
+        elif(( (list[0]==list[4]==list[8]) or (list[2]==list[4]==list[6]))):
+            if(list[4]==1):
+                return 1
+            elif(list[4]==2):
+                return 2
+        else :
+            return 0
 
 
 def single():
@@ -27,8 +55,9 @@ def multi():
     global circle # denoted by 2 ## 0 means empty
     turn=0 
 
-    while(True):
-        
+    i=9
+    while(i>0):
+        i-=1
         if(turn==0): #player one X turn
             print("Player 1's turn\n")
 
@@ -44,7 +73,14 @@ def multi():
                 else:
                     print("Block already marked. Try again")
                 
-                printgrid(list)
+            printgrid(list)
+            ans=check(list)
+            if(ans==1):
+                print("\033[1m PLAYER 1 WINS ◝(ᵔᵕᵔ)◜\033[0m")
+                break
+            elif (ans==2):
+                print("\033[1m PLAYER 2 WINS ◝(ᵔᵕᵔ)◜\033[0m")
+                break
             turn=1
 
         elif(turn==1): #player one turn
@@ -62,15 +98,19 @@ def multi():
                 else:
                     print("Block already marked. Try again")
                 
-                printgrid(list)
+            printgrid(list) 
+            ans=check(list)
+            if(ans==1):
+                print("\033[1m PLAYER 1 WINS ◝(ᵔᵕᵔ)◜\033[0m")
+                break
+            elif (ans==2):
+                print("\033[1m PLAYER 2 WINS ◝(ᵔᵕᵔ)◜\033[0m")
+                break
             turn=0
+            
+    if(ans==0):
+        print("Game Tied (╥﹏╥). Thank you for playing :) ")
 
-
-
-
-
-    for i in range(9):
-        print(list[i])
 
 t=True
 while (t):
