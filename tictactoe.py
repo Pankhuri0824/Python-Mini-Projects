@@ -1,3 +1,5 @@
+import random
+
 cross="X"
 circle="O"
 
@@ -47,6 +49,60 @@ def single():
     list=[0]*9
     global cross
     global circle
+    turn=0 
+
+    i=9
+    while(i>0):
+        i-=1
+        if(turn==0): #PLAYER X turn
+            print("Your turn\n")
+
+            turnbool=True
+            while(turnbool):
+                row=int(input("Enter Row:"))
+                col=int(input("Enter Coloumn:"))
+                index=(3*(row-1))+col-1
+
+                if(list[index]==0):
+                    list[index]=1
+                    turnbool=False
+                else:
+                    print("Block already marked. Try again")
+                
+            printgrid(list)
+            ans=check(list)
+            if(ans==1):
+                print("\033[1m YOU WIN ◝(ᵔᵕᵔ)◜\033[0m")
+                break
+            elif (ans==2):
+                print("\033[1m COMPUTER WINS ◝(ᵔᵕᵔ)◜\033[0m")
+                break
+            turn=1
+
+        elif(turn==1): #COMPUTER O turn
+            print("COMPUTER's turn\n")
+
+            turnbool=True
+            while(turnbool):
+                num=random.randrange(9)
+                if(list[num]==0):
+                    list[num]=2
+                    turnbool=False
+                    
+            printgrid(list) 
+            ans=check(list)
+            if(ans==1):
+                print("\033[1m YOU WIN ◝(ᵔᵕᵔ)◜\033[0m")
+                break
+            elif (ans==2):
+                print("\033[1m COMPUTER WINS ◝(ᵔᵕᵔ)◜\033[0m")
+                break
+            turn=0
+
+    if(ans==0):
+        print("Game Tied (╥﹏╥). Thank you for playing :) ")
+
+
 
 def multi():
     print("\n"+"\033[1mMULTI PLAYER MODE\033[0m"+"\n")
@@ -107,7 +163,7 @@ def multi():
                 print("\033[1m PLAYER 2 WINS ◝(ᵔᵕᵔ)◜\033[0m")
                 break
             turn=0
-            
+
     if(ans==0):
         print("Game Tied (╥﹏╥). Thank you for playing :) ")
 
