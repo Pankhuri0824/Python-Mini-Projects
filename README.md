@@ -1,1 +1,8 @@
-This is my 4:30 am madness om 28th of february because im between midsems , losing my mind and bored
+## PYTHON MINI PROJECTS
+
+This reposirtory is for storing some mini projects i made in python for fun :) 
+
+- Projects added :
+    - 
+    - Tic Tac Toe in Python : Single Player & Multiplayer
+    - Flower Plotting in Python
